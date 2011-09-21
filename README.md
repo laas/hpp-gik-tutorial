@@ -11,10 +11,10 @@ Prerequites
 
 Before installing this package, make sure you have installed:
 
-       [hpp-gik](https://github.com/laas/hpp-gik)
-       [jrl-dynamics](https://github.com/jrl-umi3218/jrl-dynamics)
-       [robot-viewer](https://github.com/laas/robot-viewer)
-       omniORB4
+* [hpp-gik](https://github.com/laas/hpp-gik/)
+* [jrl-dynamics](https://github.com/jrl-umi3218/jrl-dynamics/)
+* [robot-viewer](https://github.com/laas/robot-viewer/)
+* omniORB4
 
 Setup
 -----
@@ -55,7 +55,7 @@ such as:
 When the planning is finished, the romeo model will start moving. If you want
 to change the stack of tasks solved by the robot, edit the file:
 
-   src/application.cc
+     src/application.cc
 
 The tasks are defined in function `createTask()`. For more 
 information on how to create and solve tasks, have a look at 
