@@ -1,0 +1,4 @@
+INPUT                  = @CMAKE_SOURCE_DIR@/include 
+
+TAGFILES               = \
+"@HPP_GIK_DOXYGENDOCDIR@/hpp-gik.doxytag = @HPP_GIK_DOXYGENDOCDIR@"

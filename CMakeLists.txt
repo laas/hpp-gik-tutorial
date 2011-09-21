@@ -47,4 +47,11 @@ SEARCH_FOR_BOOST()
 
 ADD_SUBDIRECTORY(src)
 
+# Documentation produced by doxygen
+INCLUDE(FindDoxygen)
+IF(DOXYGEN_FOUND)
+  add_subdirectory(doc)
+ENDIF(DOXYGEN_FOUND)
+
+
 SETUP_PROJECT_FINALIZE()

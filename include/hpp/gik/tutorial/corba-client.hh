@@ -19,10 +19,11 @@
 # include <string>
 # include <omniORB4/CORBA.h>
 
-
+/// Connection to a servant in the <RobotViewer.context> context.
 class CorbaClient
 {
 public:
+  //Default setup for omniorb nameservice
   static const int DEFAULT_OMNIORB_NAMESERVICE_PORT = 2809;
   static const std::string DEFAULT_OMNIORB_NAMESERVICE_HOST;
   
@@ -34,10 +35,32 @@ protected:
   CosNaming::Name name;
 
 public:
+  /// \brief Main constructor.
+  ///
+  /// The argument specifies the current program name (i.e. argv[0]).
+  /// It is used for human-display only and can be initialized to any string.
   CorbaClient  (const std::string& progname)
     : progname_ (progname)
   {}
 
+  /// \brief Connect to CORBA service.
+  ///
+  /// Connects to CORBA service.
+  ///
+  /// This supports two differents mode:
+  /// - either no host/port is given to resolve the name service
+  ///   and it is done using the local default omniORB configuration
+  ///   (usually through the omniORB.cfg file).
+  /// - or if a host or port is given, the default configuration is overrided
+  ///   and the specified server hosts/ports are used.
+  ///   Default values are provided when specifying only one value
+  ///  (either port or host).
+  ///   * Host: localhost
+  ///   * Port: 2809
+  ///
+  /// See in the omniORB manual
+  /// (http://omniorb.sourceforge.net/omni41/omniORB/omniORB004.html#toc22)
+  /// the InitRef setting to configure the location of the NameService.
   CORBA::Object_ptr connectToServant
   (const std::string& m_HostNameServer = DEFAULT_OMNIORB_NAMESERVICE_HOST,
    int nameServicePort = DEFAULT_OMNIORB_NAMESERVICE_PORT);
@@ -48,6 +71,5 @@ protected:
   CORBA::Object_ptr resolve( void );
 
 };  
-
 
 #endif

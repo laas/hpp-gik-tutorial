@@ -43,6 +43,8 @@ namespace hpp
 	
 	setActuatedJoints();
 
+	/* Put the robot in half-sitting configuration to 
+	   avoid singularities when walking */
 	vectorN halfSittingCfg(ROMEO_NB_DOF,0.);
 
 	halfSittingCfg(Trunk_TZ) =1.083992009;
@@ -284,18 +286,6 @@ namespace hpp
       Robotbuilder::initializeRobot()
       {
 	robot_->initialize();
-      }
-
-      void
-      Robotbuilder::printBodyCoMs()
-      {
-	std::map<const std::string, CjrlBody*>::iterator it ;
-	for(it=bodyMap_.begin(); it != bodyMap_.end();it++) {
-	  vector3d localCom = (*it).second->localCenterOfMass();
-	  matrix4d jointT = (*it).second->joint()->currentTransformation();
-	  vector3d globCom = jointT*localCom;
-	  std::cout << (*it).first << " : " << globCom << std::endl;
-	}
       }
 
     }

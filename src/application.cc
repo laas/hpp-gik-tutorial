@@ -36,7 +36,7 @@ namespace hpp
     namespace tutorial
     {
       Application::Application(int argc, char* argv[]):
-	samplingPeriod_(0.005),
+	samplingPeriod_(0.005),//Set to 5ms by default. Possible values are 5, 10, 20 or 50ms
 	robot_(NULL),
 	genericTask_(NULL),
 	corba_(argv[0]),
@@ -113,10 +113,10 @@ namespace hpp
 	genericTask_ = new ChppGikGenericTask(robot_,samplingPeriod_);
 	
 	double startTime = 0;
-	/* Time before starting locomotion */
+	/* Time before starting locomotion, needed by preview controller */
 	double time = 1.6; 
 
-	/* Step parameters */
+	/* Default step parameters */
 	double finalZMPCoeff = 0.5;
 	double endShiftTime = 0.1;
 	double startShiftTime = 0.1;
@@ -152,6 +152,7 @@ namespace hpp
 				 startShiftTime,
 				 footMotionDuration,
 				 stepHeight);
+
 	time += secondStepElement->duration();
 
 	/* Extra time after finishing locomotion */
@@ -161,7 +162,7 @@ namespace hpp
 	genericTask_->addElement(firstStepElement);
         genericTask_->addElement(secondStepElement);
 
-	/* Constraint on the waist height */
+	/* Constraint on the waist height, to comply with cart-table model */
 	ChppGikPlaneConstraint * waistPlaneConstraint = 
 	  new ChppGikPlaneConstraint( *(robot_->robot()),
 				      *(robot_->robot()->waist()),
@@ -177,7 +178,7 @@ namespace hpp
 					   samplingPeriod_);
 	genericTask_->addElement(heightElem);
 
-	/* Constraint on the waist orientation */
+	/* Constraint on the waist orientation, to comply with cart-table model */
 	ChppGikParallelConstraint * waistParallelConstraint =
 	  new ChppGikParallelConstraint( *(robot_->robot()),
 					 *(robot_->robot()->waist()),
@@ -238,9 +239,10 @@ namespace hpp
 	  return ;
 	}
 
+	elementName_ = std::string("romeo");
+
 	boost::posix_time::ptime start, end;
 	
-
 	const ChppRobotMotionSample * motionSample = solutionMotion.firstSample();
 	while (motionSample) {
 
@@ -248,12 +250,13 @@ namespace hpp
 
 	  vectorN config = motionSample->configuration;
 	  motionSample = solutionMotion.nextSample();
+
+	  /* Send the configuration to robot-viewer server */
 	  robotviewer_corba::DoubleSeq outputConfig;
 	  outputConfig.length(config.size());
 	  for(unsigned int i=0;i<config.size();i++) {
 	    outputConfig[i] = config(i);
 	  }
-	  elementName_ = std::string("romeo");
 	  serverPtr_->updateElementConfig(elementName_.c_str(), outputConfig);
 
 	  end = boost::posix_time::microsec_clock::local_time();

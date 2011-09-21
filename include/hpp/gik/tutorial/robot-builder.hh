@@ -29,18 +29,27 @@ namespace hpp
     namespace tutorial
     {
       enum JointType {FREEFLYER,ROTATION,TRANSLATION,ANCHOR};
-
+      /**
+	 \brief Builds a jrl-dynamics model of the Romeo humanoid robot.
+      */
       class Robotbuilder
       {
       public:
+	 /**
+	 \brief Constructor
+	 */
 	Robotbuilder ();
+	/**
+	 \brief Destructor
+	 */
 	~Robotbuilder ();
 
+	/**
+	 \brief Builds the model and returns a pointer to a newly allocated
+	 jrl humanoid dynamic robot
+	 */
 	CjrlHumanoidDynamicRobot * 
 	makeRobot();
-
-	void
-	printBodyCoMs();
 
       private:
 	void setActuatedJoints();
@@ -99,7 +108,6 @@ namespace hpp
 			       const vector3d& gazeDirection);
 
 	void initializeRobot();
-
 
 	std::map<const std::string, CjrlJoint*> jointMap_;
 	std::map<const std::string, CjrlBody*> bodyMap_;
