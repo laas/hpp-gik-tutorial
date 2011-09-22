@@ -16,9 +16,9 @@ Installing dependencies
 
 To install dependencies, use LAAS package management system robotpkg
 
-   git clone http://softs.laas.fr/git/robots/robotpkg.git
-   cd robotpkg
-   ./bootstrap/bootstrap --prefix=$YOUR_PREFIX
+    git clone http://softs.laas.fr/git/robots/robotpkg.git
+    cd robotpkg
+    ./bootstrap/bootstrap --prefix=$YOUR_PREFIX
 
 where YOUR_PREFIX is /usr/local by default.
 
