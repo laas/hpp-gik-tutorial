@@ -17,12 +17,12 @@ Installing dependencies
 To install dependencies, use LAAS package management system robotpkg
    git clone http://softs.laas.fr/git/robots/robotpkg.git
    cd robotpkg
-   ./bootstrap/bootstrap --prefix=$PREFIX
-where PREFIX is /usr/local by default.
+   ./bootstrap/bootstrap --prefix=$YOUR_PREFIX
+where YOUR_PREFIX is /usr/local by default.
 
 Complete the configuration file of robotpkg
     cd ../hpp-gik-tutorial
-    cat robotpkg.conf.append >> $PREFIX/etc/robotpkg.conf
+    cat robotpkg.conf.append >> $YOUR_PREFIX/etc/robotpkg.conf
 
 Install hpp-gik and dependencies
     cd ../robotpkg/path/hpp-gik
@@ -34,7 +34,7 @@ Install robotviewer
     cd robot-viewer
     git checkout -b romeo 84dbb30140c41858042781444f50c4b8040eb578
     git submodule update
-    python setup.py install --prefix $PREFIX
+    python setup.py install --prefix $YOUR_PREFIX
 
 Setup
 -----
@@ -59,7 +59,7 @@ If not run
 Then launch robot-viewer, passing as argument the
 romeo configuration file distributed with this package:
 
-    robotviewer -c $PREFIX/share/hpp/gik/tutorial/config.romeo
+    robotviewer -c $YOUR_PREFIX/share/hpp/gik/tutorial/config.romeo
 
 While parsing the robot files, the robot-viewer server outputs some
 log messages, such as:
@@ -91,4 +91,4 @@ to change the stack of tasks solved by the robot, edit the file:
 
 The tasks are defined in function `createTask()`. For more
 information on how to create and solve tasks, have a look at
-the `hpp-gik` package documentation (installed in $PREFIX/share/doc/hpp-gik/doxygen-html/index.html).
+the `hpp-gik` package documentation (installed in $YOUR_PREFIX/share/doc/hpp-gik/doxygen-html/index.html).
