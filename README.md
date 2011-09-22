@@ -43,8 +43,11 @@ Install robotviewer
 
 Setup
 -----
+Clone this package
 
-To compile this package, it is recommended to create a separate build
+    git clone --recursive git://github.com/laas/hpp-gik-tutorial.git
+
+To compile, it is recommended to create a separate build
 directory:
 
     cd hpp-gik-tutorial
