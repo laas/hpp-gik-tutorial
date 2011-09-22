@@ -42,20 +42,20 @@ namespace hpp
 	corba_(argv[0]),
 	serverPtr_()
       {
-	CORBA::Object_ptr corba_obj =
-	  corba_.connectToServant ();
-
-	 try
-	   {
-	     serverPtr_ = robotviewer_corba::RobotViewer::_narrow(corba_obj);
-	     if (CORBA::is_nil (serverPtr_))
-	       throw std::runtime_error ("failed to connect to the server.");
-	   }
-	 catch (CORBA::TRANSIENT& exception)
-	   {
-	     std::cerr << "Failed to connect to robotviewer." << std::endl;
-	     throw;
-	   }
+	/* Before starting, check 
+	   that the server answers to ping */
+	try {
+	  CORBA::Object_ptr corba_obj =
+	    corba_.connectToServant ();
+	  serverPtr_ = robotviewer_corba::RobotViewer::_narrow(corba_obj);
+	  char * ping_s = "";
+	  CORBA::String_out ping(ping_s);
+	  serverPtr_->Ping(ping);
+	} catch(CORBA::TRANSIENT& exception)
+	  {
+	    std::cerr << "Check that the robotviewer server is up" << std::endl;
+	    throw;
+	  }
       }
       
       Application::~Application()
@@ -240,9 +240,8 @@ namespace hpp
 	}
 
 	elementName_ = std::string("romeo");
+	boost::posix_time::ptime start, end;    
 
-	boost::posix_time::ptime start, end;
-	
 	const ChppRobotMotionSample * motionSample = solutionMotion.firstSample();
 	while (motionSample) {
 

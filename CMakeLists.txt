@@ -45,13 +45,18 @@ SET(BOOST_COMPONENTS
   filesystem system thread program_options unit_test_framework)
 SEARCH_FOR_BOOST()
 
+
 ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(share)
+
 
 # Documentation produced by doxygen
 INCLUDE(FindDoxygen)
 IF(DOXYGEN_FOUND)
   add_subdirectory(doc)
 ENDIF(DOXYGEN_FOUND)
+
+
 
 
 SETUP_PROJECT_FINALIZE()

@@ -31,7 +31,7 @@ ADD_EXECUTABLE(hpp-gik-tutorial
   corba-client.cc
   ${ALL_IDL_STUBS}
   )
-ADD_DEPENDENCIES(hpp-gik-tutorial nao.cc)
+ADD_DEPENDENCIES(hpp-gik-tutorial romeo.cc)
 
 PKG_CONFIG_USE_DEPENDENCY(hpp-gik-tutorial hpp-gik)
 PKG_CONFIG_USE_DEPENDENCY(hpp-gik-tutorial jrl-dynamics)

@@ -31,11 +31,13 @@ Running the package
 -------------------
 
 Before running the tutorial script, make sure you have a naming service 
-running (`omniNames`). Then launch:
+running (`omniNames`). Then launch robot-viewer, passing as argument the
+romeo configuration file distributed with this package:
 
-	hpp-gik-tutorial
+      robotviewer -c $CMAKE_INSTALL_PREFIX/share/hpp/gik/tutorial/config.romeo
 
-The robot-viewer server outputs some log messages, such as:
+While parsing the robot files, the robot-viewer server outputs some 
+log messages, such as:
 
     robotviewer.kinematic_server:INFO:parsed_config <robotviewer.kinematic_server.CustomConfigParser instance at 0x93d12cc>
     robotviewer.display_server:INFO:Creating window
@@ -45,14 +47,19 @@ The robot-viewer server outputs some log messages, such as:
     robotviewer.display_server:ERROR:romeo Element with that name exists already
     None
 
-Then the planning is done. hpp-gik also outputs some log messages. It is
+Once the parsing is finished and the server is up, you should see a 3D view of
+Romeo in an empty environment, launch the hpp-gik-tutorial executable.
+
+      hpp-gik-tutorial
+
+This will start the planning phase. hpp-gik outputs some log messages. It is
 normal that during whole-body motion execution, the trajectory of the ZMP
 slightly differs from the planned trajectory. You might observe messages
 such as:
 
      Eccentered ZMP: 0.0418092 , 0.0580008 at time 2.305
 
-When the planning is finished, the romeo model will start moving. If you want
+When the planning is finished, the Romeo model will start moving. If you want
 to change the stack of tasks solved by the robot, edit the file:
 
      src/application.cc
