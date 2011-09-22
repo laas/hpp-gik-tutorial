@@ -15,20 +15,25 @@ Installing dependencies
 -----------------------
 
 To install dependencies, use LAAS package management system robotpkg
+
    git clone http://softs.laas.fr/git/robots/robotpkg.git
    cd robotpkg
    ./bootstrap/bootstrap --prefix=$YOUR_PREFIX
+
 where YOUR_PREFIX is /usr/local by default.
 
 Complete the configuration file of robotpkg
+
     cd ../hpp-gik-tutorial
     cat robotpkg.conf.append >> $YOUR_PREFIX/etc/robotpkg.conf
 
 Install hpp-gik and dependencies
+
     cd ../robotpkg/path/hpp-gik
     make install
 
 Install robotviewer
+
     cd ../../..
     git clone --recursive git://github.com/laas/robot-viewer.git
     cd robot-viewer
@@ -41,6 +46,7 @@ Setup
 
 To compile this package, it is recommended to create a separate build
 directory:
+
     cd hpp-gik-tutorial
     mkdir _build
     cd _build
@@ -52,8 +58,11 @@ Running the package
 
 Before running the tutorial script, make sure you have a Corba naming service
 running
+
     ps -ef | grep omni
+
 If not run
+
     omniNames -start 2809
 
 Then launch robot-viewer, passing as argument the
