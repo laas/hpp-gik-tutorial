@@ -1,0 +1,47 @@
+ACCEPTABLE_LICENSES+=jdk14-license
+ACCEPTABLE_LICENSES+=sun-java3d-license
+ACCEPTABLE_LICENSES+=sun-jre6-license
+ACCEPTABLE_LICENSES+=jmf-license
+ACCEPTABLE_LICENSES+=sun-jdk6-license
+ACCEPTABLE_LICENSES+=eclipse-public-license
+ACCEPTABLE_LICENSES+=aemdesign-cfsqp-license
+ACCEPTABLE_LICENSES+=openhrp-grx-license
+ACCEPTABLE_LICENSES+=cnrs-stackoftasks-license
+ACCEPTABLE_LICENSES+=cnrs-hpp-closed-source
+
+PREFER.gcc4-fortran=	system
+PREFER.gcc42-fortran=	system
+PREFER.mpfr=	robotpkg
+PREFER.gmp=	robotpkg
+PREFER.bzip2=	system
+PREFER.lapack=	system
+PREFER.blas=	system
+
+PREFER.boost = system
+PREFER.boost-libs=	system
+PREFER.boost-jam=	system
+PREFER.boost-build=	system
+PREFER.boost-docs=	system
+PREFER.boost-numeric-bindings=	robotpkg
+
+PKG_OPTIONS.kineo-pp+=			debug
+PKG_OPTIONS.hrp2_14+=			debug
+PKG_OPTIONS.hpp-core+=			debug verbose1
+PKG_OPTIONS.hpp-openhrp+=		debug verbose1
+PKG_OPTIONS.hpp-walkfootplanner+=     	debug
+PKG_OPTIONS.hpp-walkplanner+=		debug
+PKG_OPTIONS.jrl-walkgen+=		debug
+PKG_OPTIONS.hpp-corbaserver+=		debug verbose1
+PKG_OPTIONS.hpp-kwsplus+=		debug verbose1
+PKG_OPTIONS.hpp-model+=			debug verbose1
+PKG_OPTIONS.hrp2-builder+=		debug
+PKG_OPTIONS.hrp2-dynamics+=		debug
+PKG_OPTIONS.jrl-dynamics+=		debug
+PKG_OPTIONS.jrl-mathtools+=		debug
+PKG_OPTIONS.jrl-mal+=
+PKG_OPTIONS.kpp-interface+=		debug verbose1
+PKG_OPTIONS.kpp-interfacewalk+=		debug verbose
+PKG_OPTIONS.hpp-gik+=			debug
+
+WRKOBJDIR=${LOCALBASE}/build
+export LD_LIBRARY_PATH=${LOCALBASE}/lib

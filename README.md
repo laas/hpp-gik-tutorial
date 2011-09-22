@@ -9,19 +9,39 @@ through Corba.
 Prerequites
 -----------
 
-Before installing this package, make sure you have installed:
+We recommend to install the software on a Linux computer running Ubuntu 10.04.
 
-* [hpp-gik](https://github.com/laas/hpp-gik/)
-* [jrl-dynamics](https://github.com/jrl-umi3218/jrl-dynamics/)
-* [robot-viewer](https://github.com/laas/robot-viewer/)
-* omniORB4
+Installing dependencies
+-----------------------
+
+To install dependencies, use LAAS package management system robotpkg
+   git clone http://softs.laas.fr/git/robots/robotpkg.git
+   cd robotpkg
+   ./bootstrap/bootstrap --prefix=$PREFIX
+where PREFIX is /usr/local by default.
+
+Complete the configuration file of robotpkg
+    cd ../hpp-gik-tutorial
+    cat robotpkg.conf.append >> $PREFIX/etc/robotpkg.conf
+
+Install hpp-gik and dependencies
+    cd ../robotpkg/path/hpp-gik
+    make install
+
+Install robotviewer
+    cd ../../..
+    git clone --recursive git://github.com/laas/robot-viewer.git
+    cd robot-viewer
+    git checkout -b romeo 84dbb30140c41858042781444f50c4b8040eb578
+    git submodule update
+    python setup.py install --prefix $PREFIX
 
 Setup
 -----
 
 To compile this package, it is recommended to create a separate build
 directory:
-
+    cd hpp-gik-tutorial
     mkdir _build
     cd _build
     cmake [OPTIONS] ..
@@ -30,13 +50,18 @@ directory:
 Running the package
 -------------------
 
-Before running the tutorial script, make sure you have a naming service 
-running (`omniNames`). Then launch robot-viewer, passing as argument the
+Before running the tutorial script, make sure you have a Corba naming service
+running
+    ps -ef | grep omni
+If not run
+    omniNames -start 2809
+
+Then launch robot-viewer, passing as argument the
 romeo configuration file distributed with this package:
 
-      robotviewer -c $CMAKE_INSTALL_PREFIX/share/hpp/gik/tutorial/config.romeo
+    robotviewer -c $PREFIX/share/hpp/gik/tutorial/config.romeo
 
-While parsing the robot files, the robot-viewer server outputs some 
+While parsing the robot files, the robot-viewer server outputs some
 log messages, such as:
 
     robotviewer.kinematic_server:INFO:parsed_config <robotviewer.kinematic_server.CustomConfigParser instance at 0x93d12cc>
@@ -64,6 +89,6 @@ to change the stack of tasks solved by the robot, edit the file:
 
      src/application.cc
 
-The tasks are defined in function `createTask()`. For more 
-information on how to create and solve tasks, have a look at 
-the `hpp-gik` package documentation.
+The tasks are defined in function `createTask()`. For more
+information on how to create and solve tasks, have a look at
+the `hpp-gik` package documentation (installed in $PREFIX/share/doc/hpp-gik/doxygen-html/index.html).
