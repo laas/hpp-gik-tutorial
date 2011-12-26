@@ -54,6 +54,8 @@ namespace hpp
 	
 	robotviewer_corba::RobotViewer_var  serverPtr_;
 	std::string elementName_;
+
+	bool robotviewer_;
       };
     }
   }

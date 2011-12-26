@@ -40,7 +40,8 @@ namespace hpp
 	robot_(NULL),
 	genericTask_(NULL),
 	corba_(argv[0]),
-	serverPtr_()
+	serverPtr_(),
+	robotviewer_ (true)
       {
 	/* Before starting, check 
 	   that the server answers to ping */
@@ -53,9 +54,15 @@ namespace hpp
 	  serverPtr_->Ping(ping);
 	} catch(CORBA::TRANSIENT& exception)
 	  {
-	    std::cerr << "Check that the robotviewer server is up" << std::endl;
-	    throw;
+	    robotviewer_ = false;
+	    std::cerr << "robotviewer server does not seem to work."
+		      << std::endl;
 	  }
+	catch (CORBA::Exception& exception) {
+	  std::cerr << "CORBA exception: " << exception._name ()
+		    << std::endl;
+	  robotviewer_ = false;
+	}
       }
       
       Application::~Application()
@@ -76,8 +83,10 @@ namespace hpp
 	createTask();
 	std::cout << "Solving task." << std::endl;
 	solveTask();
-	std::cout << "Displaying motion." << std::endl;
-	outputMotion();
+	if (robotviewer_) {
+	  std::cout << "Displaying motion." << std::endl;
+	  outputMotion();
+	}
       }
 
       void 
